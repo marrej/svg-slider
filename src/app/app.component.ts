@@ -6,10 +6,8 @@ import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  labels = ["25", "50", "75"];
-  constructor(
-    private changeDetector: ChangeDetectorRef
-  ) {}
+  labels: string[] = ["25", "50", "75"];
+  thumbPosition: number = 0.3;
 
   getLabelXPosition(i: number): number {
     return (this.getTotalWidth() / (this.labels.length + 1)) * (i + 1);
@@ -24,8 +22,11 @@ export class AppComponent {
     }
   }
 
-  @HostListener("window:resize")
-  public onScreenResize(): void {
-    this.changeDetector.detectChanges();
+  public getThumbPosition(): number {
+    return this.thumbPosition * this.getTotalWidth();
+  }
+
+  public getLineWidth(): string {
+    return this.getThumbPosition() + 'px';
   }
 }
