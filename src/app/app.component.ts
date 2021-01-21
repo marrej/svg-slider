@@ -60,4 +60,10 @@ export class AppComponent {
     this.isDragStarted = false;
   }
 
+  @HostListener('dragstart', ['$event'])
+  public onDragStart(event: any): void {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
 }
