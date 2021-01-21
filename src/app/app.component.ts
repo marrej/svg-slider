@@ -7,8 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   labels = ["25", "50", "75"];
-  width = 500;
   getLabelXPosition(i: number): number {
-    return (this.width / (this.labels.length + 1)) * (i + 1);
+    return (this.getTotalWidth() / (this.labels.length + 1)) * (i + 1);
+  }
+
+  public getTotalWidth(): number {
+    const slider = document.querySelector("#wrapper");
+    if (slider) {
+      return slider.clientWidth;
+    } else {
+      return 0;
+    }
   }
 }
