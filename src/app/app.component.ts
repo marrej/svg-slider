@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   labels = ["25", "50", "75"];
+  constructor(
+    private changeDetector: ChangeDetectorRef
+  ) {}
+
   getLabelXPosition(i: number): number {
     return (this.getTotalWidth() / (this.labels.length + 1)) * (i + 1);
   }
@@ -18,5 +22,10 @@ export class AppComponent {
     } else {
       return 0;
     }
+  }
+
+  @HostListener("window:resize")
+  public onScreenResize(): void {
+    this.changeDetector.detectChanges();
   }
 }
