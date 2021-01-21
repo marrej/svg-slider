@@ -40,4 +40,24 @@ export class AppComponent {
     this.isDragStarted = true;
     this.updateThumbPosition(event.offsetX);
   }
+
+  @HostListener('mousemove', ['$event'])
+  public onMouseMove(event: any): void {
+    if (this.isDragStarted) {
+      this.updateThumbPosition(event.offsetX);
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('mouseup')
+  public onMouseUp(): void {
+    this.isDragStarted = false;
+  }
+
+  @HostListener('mouseleave')
+  public onMouseLeave(): void {
+    this.isDragStarted = false;
+  }
+
 }
