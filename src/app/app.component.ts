@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   labels: string[] = ["25", "50", "75"];
   thumbPosition: number = 0.3;
+  isDragStarted: boolean = false;
 
   getLabelXPosition(i: number): number {
     return (this.getTotalWidth() / (this.labels.length + 1)) * (i + 1);
@@ -28,5 +29,15 @@ export class AppComponent {
 
   public getLineWidth(): string {
     return this.getThumbPosition() + 'px';
+  }
+
+  private updateThumbPosition(position: number): void {
+    this.thumbPosition = position/this.getTotalWidth();
+  }
+
+  @HostListener('mousedown', ['$event'])
+  public onMouseDown(event: any): void {
+    this.isDragStarted = true;
+    this.updateThumbPosition(event.offsetX);
   }
 }
