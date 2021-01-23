@@ -5,22 +5,17 @@ import { Component, HostListener, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   labels: string[] = ["25", "50", "75"];
   thumbPosition: number = 0.3;
   isDragStarted: boolean = false;
-  svgElement: any;
-
-  public ngOnInit(): void {
-    this.svgElement = document.querySelector("#wrapper");
-  }
 
   getLabelXPosition(i: number): number {
     return (this.getTotalWidth() / (this.labels.length + 1)) * (i + 1);
   }
 
   public getTotalWidth(): number {
-    const slider = this.svgElement;
+    const slider = document.querySelector("#wrapper");
     if (slider) {
       return slider.clientWidth;
     } else {
@@ -67,7 +62,7 @@ export class AppComponent implements OnInit {
 
   @HostListener('touchmove', ['$event'])
   public onTouchMove(event: any): void {
-    this.updateThumbPosition(event.touches[0].clientX - this.svgElement.getBoundingClientRect().left)
+    this.updateThumbPosition(event.touches[0].clientX)
   }
 
   @HostListener('dragstart', ['$event'])

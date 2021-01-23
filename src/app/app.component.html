@@ -1,16 +1,18 @@
 <div style="margin: 40px">
-  <svg id="wrapper" width="100%" height="100%">
-    <rect fill="grey" width="100%" height="5" rx="3" y="5"></rect>
-    <rect fill="blue" [attr.width]="this.getLineWidth()" height="5" rx="3" y="5"></rect>
-    <text
-      *ngFor="let label of labels; let i = index"
-      fill="blue"
-      y="30"
-      style="dominant-baseline: middle;text-anchor: middle;font-weight:bold"
-      [attr.x]="this.getLabelXPosition(i)"
-    >
-      {{label}}
-    </text>
-    <ellipse cy="7.5" [attr.cx]="this.getThumbPosition()" rx="7.5" ry="7.5" fill="blue" />
-  </svg>
+  <div id="wrapper">
+    <svg width="100%" height="100%">
+      <rect fill="grey" width="100%" height="5" rx="3" y="5"></rect>
+      <rect fill="blue" [attr.width]="this.getLineWidth()" height="5" rx="3" y="5"></rect>
+      <text
+        *ngFor="let label of labels; let i = index"
+        fill="blue"
+        y="30"
+        style="dominant-baseline: middle;text-anchor: middle;font-weight:bold"
+        [attr.x]="this.getLabelXPosition(i)"
+      >
+        {{label}}
+      </text>
+      <ellipse cy="7.5" [attr.cx]="this.getThumbPosition()" rx="7.5" ry="7.5" fill="blue" />
+    </svg>
+  </div>
 </div>
