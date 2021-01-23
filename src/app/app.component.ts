@@ -44,6 +44,8 @@ export class AppComponent implements OnInit {
   public onMouseDown(event: any): void {
     this.isDragStarted = true;
     this.updateThumbPosition(event.offsetX);
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   @HostListener('mousemove', ['$event'])
